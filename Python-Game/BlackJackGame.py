@@ -1,6 +1,4 @@
 import random
-import time
-
 
 ##set up of all basic classes
 class Card:
@@ -79,7 +77,7 @@ def play_blackjack(deck):
             print("DEALER SCORE = ", dealer_score - dealer_hands[-1].card_value)
     
     
-        # In case both the cards are Ace, make the second ace value as 1 
+        #set second card to different value to account for 11 or 1 
         if len(dealer_hands) == 2:
             if dealer_hands[0].card_value == 11 and dealer_hands[1].card_value == 11:
                 dealer_hands[1].card_value = 1
@@ -87,10 +85,10 @@ def play_blackjack(deck):
     
         input()
     
-        # Player gets a blackjack   
+        #player hits blackjack   
         if player_score == 21:
-            print("PLAYER HAS A BLACKJACK!!!!")
-            print("PLAYER WINS!!!!")
+            print("YOU HAVE BLACKJACK!!")
+            print("YOU WIN!!")
             quit()
 
 def view_instructions(self):
@@ -108,11 +106,5 @@ def view_instructions(self):
 
 
             
-            
+     
     
-     
-     
-     
-      # for str in self.nums:
-        #     if self.value == "A":
-        #         ## how to set for 1 or 11?
