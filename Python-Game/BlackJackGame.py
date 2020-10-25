@@ -1,6 +1,6 @@
 import random
 
-##set up of all basic classes
+##set up of Card class
 class Card:
     def __init__(self, suit, card, card_value):
         self.suit = suit
@@ -17,23 +17,24 @@ class Card:
 suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
 cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "Q", "K", "J"]
 cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
-
-# The suit value 
 suits_values = {"Spades":"\u2664", "Hearts":"\u2661", "Clubs": "\u2667", "Diamonds": "\u2662"}
- 
 
- 
+values = suits_values.values()
+symbols_list = list(values)
+
+
 
 ##deck set up
 
 deck = []
 
+## loop to establish 52 cards
 for suit in suits:
     for card in cards:
         deck.append(Card(suits_values[suit], card, cards_values[card]))
 
 
-
+##function for game/game reference
 def play_blackjack(self):
 
     global cards_values
@@ -46,7 +47,7 @@ def play_blackjack(self):
     dealer_score = 0
     player_score = 0
     
-    ##loop set up
+    ##loop set up for game runs
     while len(player_hands) < 2:
     
         #card deal using random function
@@ -54,7 +55,7 @@ def play_blackjack(self):
         player_hands.append(player_card)
         deck.remove(player_card)
     
-        #score tally
+        #score calculator
         player_score += player_card.card_value
     
         #Ace value swap 11 or 1 
@@ -70,15 +71,15 @@ def play_blackjack(self):
     
         input()
     
-        # Randomly dealing a card
+        #random card deal
         dealer_card = random.choice(deck)
         dealer_hands.append(dealer_card)
         deck.remove(dealer_card)
     
-        # Updating the dealer score
+        #dealer score calculator
         dealer_score += dealer_card.card_value
     
-        # Print dealer cards and score, keeping in mind to hide the second card and score
+        #print dealer card and score
         print("DEALER CARDS: ")
         print(dealer_card)
         if len(dealer_hands) == 1:
@@ -87,7 +88,7 @@ def play_blackjack(self):
             print("DEALER SCORE = ", dealer_score - dealer_hands[-1].card_value)
     
     
-        #set second card to different value to account for 11 or 1 
+        #set second card to different value to account for 11 or 1 for the Ace card
         if len(dealer_hands) == 2:
             if dealer_hands[0].card_value == 11 and dealer_hands[1].card_value == 11:
                 dealer_hands[1].card_value = 1
@@ -95,7 +96,7 @@ def play_blackjack(self):
     
         input()
     
-        #player hits blackjack   
+        #different variations of scores and win/loss statements
         if player_score == 21:
             print("YOU HAVE BLACKJACK!!")
             print("YOU WIN!!")
@@ -103,15 +104,41 @@ def play_blackjack(self):
         elif dealer_score == 21:
             print("Oh no! Dealer HAS BLACKJACK!! You lose. :(")
             quit()
-        elif dealer_score > player_score:
-            print("Better luck next time")
-        
+
+        while len(player_hands) == 2:
+            if player_score > dealer_score and player_score < 21:
+                print("YOU WIN!!")
+                quit()
+            
+            elif player_score > dealer_score and player_score > 21:
+                print("BUST. YOU LOSE!!")
+                quit()
+
+            elif dealer_score > player_score and dealer_score < 21:
+                print("DEALER WINS!")
+                quit()
+            
+            elif dealer_score > player_score and dealer_score > 21:
+                print("DEALER BUST")
+                quit()
+
+            
+            elif dealer_score > player_score:
+                print("Better luck next time")
+                quit()
+            else:
+                player_score == dealer_score
+                print("PUSH")
+                quit()
         
 
+        
+        
+#method to call instructions in menu (very basic instructions)
 def view_instructions(self):
     rules = """
     1. The goal of blackjack is to beat the dealer's hand without going over 21.
-    Face cards are worth 10. 
+       Face cards are worth 10. 
     2. Aces are worth 1 or 11, whichever makes a better hand.
     3. Each player starts with two cards, one of the dealer's cards is hidden until the end.
     4. To 'Hit' is to ask for another card. To 'Stand' is to hold your total and end your turn.
@@ -120,9 +147,19 @@ def view_instructions(self):
     """
     print(rules)
 
+##menu
 while True:
+    #print centered welcome statement
+    greeting = "WELCOME TO THE BLACKJACK GAME! \n"
+    centered = greeting.center(78)
 
-    print("WELCOME TO THE BLACKJACK GAME! Choose an option from below and press enter: \n")
+    print("\u2664    " * 4 + "\u2661    " * 4 + "\u2667    "* 4 + "\u2662    " * 4 + "\n")
+    print(centered)
+    print("\u2664    " * 4 + "\u2661    " * 4 + "\u2667    "* 4 + "\u2662    " * 4 + "\n")
+    
+    #print choice option
+    print("Choose an option from below and press enter: \n")
+    
     choice = int(input("""
         1. Start Game
         2. View Instructions
@@ -134,7 +171,8 @@ while True:
     elif choice == 2:
         view_instructions(deck)
     else:
-        print("Thanks for playing!!")
+        print(f" {suits_values[suit] * 4} THANKS FOR PLAYING! {suits_values[suit] * 4}")
+        quit()
                    
 
 
