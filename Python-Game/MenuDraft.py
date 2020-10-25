@@ -1,6 +1,6 @@
 while True:
 
-    print("WELCOME TO THE BLACKJACK GAME!"
+    print("WELCOME TO THE BLACKJACK GAME!")
     choice = int(input("""
         1. Start Game
         2. View Instructions

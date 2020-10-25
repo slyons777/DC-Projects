@@ -2,29 +2,26 @@ import random
 
 ##set up of all basic classes
 class Card:
-    def __init__(self, suits, cards, suitnums):
+    def __init__(self, suits, cards):
         self.suits = suits
         self.cards = cards
-        self.suitnums = suitnums
+        
+        
 
-## use in menu later?
-class Dealer:
-    pass
+
 
 ##lists and dictionaries of card and card values
 suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
 cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "A", "Q", "K", "J"]
-suitnums = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
+card_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
 
-
-##set deck placeholder
 deck = []
 
 
 ##deck set up
 for suit in suits:
     for card in cards:
-        deck.append(Card(suits[suit], card, suitnums[card]))
+         deck.append(Card(suit, card))
 
 def play_blackjack(deck):
 
@@ -102,7 +99,22 @@ def view_instructions(self):
     6. If you are dealt 21 from the start (Ace & 10), you got a blackjack.
     """
     print(rules)
-                    
+
+while True:
+
+    print("WELCOME TO THE BLACKJACK GAME!")
+    choice = int(input("""
+        1. Start Game
+        2. View Instructions
+        3. Exit
+        """))
+    if choice == 1:
+        play_blackjack(deck)
+    elif choice == 2:
+        view_instructions(deck)
+    else:
+        pass
+                   
 
 
             
