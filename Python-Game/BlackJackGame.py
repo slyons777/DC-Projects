@@ -2,28 +2,39 @@ import random
 
 ##set up of all basic classes
 class Card:
-    def __init__(self, suits, cards):
-        self.suits = suits
-        self.cards = cards
+    def __init__(self, suit, card, card_value):
+        self.suit = suit
+        self.card = card
+        self.card_value = card_value
+    
+    def __str__(self):
+        return self.card + " of " + self.suit
         
         
-
-
+        
 
 ##lists and dictionaries of card and card values
 suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
-cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "A", "Q", "K", "J"]
-card_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
+cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "Q", "K", "J"]
+cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
+
+# The suit value 
+suits_values = {"Spades":"\u2664", "Hearts":"\u2661", "Clubs": "\u2667", "Diamonds": "\u2662"}
+ 
+
+ 
+
+##deck set up
 
 deck = []
 
-
-##deck set up
 for suit in suits:
     for card in cards:
-         deck.append(Card(suit, card))
+        deck.append(Card(suits_values[suit], card, cards_values[card]))
 
-def play_blackjack(deck):
+
+
+def play_blackjack(self):
 
     global cards_values
     
@@ -54,6 +65,7 @@ def play_blackjack(deck):
     
         # Print player cards and score      
         print("PLAYER HAND: ")
+        print(player_card)
         print("PLAYER SCORE = ", player_score)
     
         input()
@@ -68,6 +80,7 @@ def play_blackjack(deck):
     
         # Print dealer cards and score, keeping in mind to hide the second card and score
         print("DEALER CARDS: ")
+        print(dealer_card)
         if len(dealer_hands) == 1:
             print("DEALER SCORE = ", dealer_score)
         else:   
@@ -87,6 +100,13 @@ def play_blackjack(deck):
             print("YOU HAVE BLACKJACK!!")
             print("YOU WIN!!")
             quit()
+        elif dealer_score == 21:
+            print("Oh no! Dealer HAS BLACKJACK!! You lose. :(")
+            quit()
+        elif dealer_score > player_score:
+            print("Better luck next time")
+        
+        
 
 def view_instructions(self):
     rules = """
@@ -102,18 +122,19 @@ def view_instructions(self):
 
 while True:
 
-    print("WELCOME TO THE BLACKJACK GAME!")
+    print("WELCOME TO THE BLACKJACK GAME! Choose an option from below and press enter: \n")
     choice = int(input("""
         1. Start Game
         2. View Instructions
         3. Exit
+
         """))
     if choice == 1:
         play_blackjack(deck)
     elif choice == 2:
         view_instructions(deck)
     else:
-        pass
+        print("Thanks for playing!!")
                    
 
 
