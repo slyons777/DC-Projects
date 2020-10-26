@@ -9,7 +9,7 @@
 
         
 
-#####Python tools used:
+####Python tools used:
         
             1. Colorama/Fore (for terminal colors) 
             2. random function import for dealer shuffles
