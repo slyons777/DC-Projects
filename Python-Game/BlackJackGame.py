@@ -1,9 +1,11 @@
 
 from subprocess import call
 from colorama import Fore
+import emoji
 import time
 import os
 import random
+
 
 
 #set to use clear 
@@ -28,7 +30,7 @@ cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "Q", "K", "J"]
 cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
 suits_values = {"Spades":"\u2664", "Hearts":"\u2661", "Clubs": "\u2667", "Diamonds": "\u2662"}
 
-
+print(emoji.emojize("::"))
 
 ##deck set up
 deck = []
@@ -54,6 +56,7 @@ def play_blackjack(self):
     
     ##loop set up for game runs
     while len(player_hands) < 2:
+        
     
         #card deal using random function
         player_card = random.choice(deck)
@@ -105,45 +108,40 @@ def play_blackjack(self):
     
         #different variations of scores and win/loss statements
         if player_score == 21:
-            print(Fore.RED + "YOU HAVE BLACKJACK!!" + Fore.RESET)
-            print(Fore.RED + "YOU WIN!!\n" + Fore.RESET)
+            print(Fore.RED + (emoji.emojize(":money_bag:")) * 2 + "YOU HAVE BLACKJACK!!" + (emoji.emojize(":money_bag:")) * 2 + Fore.RESET)
+            print(Fore.RED + (emoji.emojize(":confetti_ball: ")) * 2 + "YOU WIN!!" + (emoji.emojize(" :confetti_ball:")) * 2  + Fore.RESET)
             break
             play_blackjack(deck)
 
         elif dealer_score == 21:
-            print(Fore.RED + "Oh no! Dealer HAS BLACKJACK!! You lose. :(\n" + Fore.RESET)
+            print(Fore.RED + "OH NO! \nDEALER HAS BLACKJACK!! YOU LOSE!" + (emoji.emojize(":money_with_wings:" + ":broken_heart:")) * 2 + "\n" + Fore.RESET)
             break
             play_blackjack(deck)
 
         while len(player_hands) == 2:
             if player_score > dealer_score and player_score < 21:
-                print(Fore.RED + "YOU WIN!!" + Fore.RESET)
+                print(Fore.RED + (emoji.emojize(":confetti_ball: ")) * 2 + "YOU WIN!!" + (emoji.emojize(" :confetti_ball:")) * 2 + Fore.RESET)
                 break
                 play_blackjack(deck)
             
-            elif player_score > dealer_score and player_score > 21:
+            elif player_score > 21:
                 print(Fore.RED + "BUST. YOU LOSE!!" + Fore.RESET)
                 break
                 play_blackjack(deck)
 
             elif dealer_score > player_score and dealer_score < 21:
-                print(Fore.RED + "DEALER WINS!" + Fore.RESET + "\n")
+                print(Fore.RED + (emoji.emojize(":thumbs_down:")) + "DEALER WINS!\nBETTER LUCK NEXT TIME" + (emoji.emojize(":thumbs_down:"))+ Fore.RESET + "\n")
                 break
                 play_blackjack(deck)
             
             elif dealer_score > 21:
-                print(Fore.RED + "DEALER BUST" + Fore.RESET)
-                break
-                play_blackjack(deck)
-
-            elif dealer_score > player_score:
-                print(Fore.RED + "Better luck next time" + Fore.RESET)
+                print(Fore.RED + "DEALER BUST\n YOU WIN!" + Fore.RESET)
                 break
                 play_blackjack(deck)
 
             else:
                 player_score == dealer_score
-                print(Fore.RED + "PUSH" + Fore.RESET)
+                print(Fore.RED + (emoji.emojize(":red_circle: ")) + "PUSH" + (emoji.emojize(" :red_circle:")) + Fore.RESET)
                 break
                 play_blackjack(deck)
         
@@ -165,8 +163,8 @@ def view_instructions(self):
 
 ##menu
 while True:
-    #print centered welcome statement
-    greeting = Fore.RED + "WELCOME TO THE BLACKJACK GAME! \n" + Fore.RESET
+    #print centered welcome statement 
+    greeting = Fore.RED + (emoji.emojize(":sparkles: ")) * 4 + "WELCOME TO THE BLACKJACK GAME!" + (emoji.emojize(" :sparkles:")) * 4 + "\n" + Fore.RESET 
     centered = greeting.center(78)
 
     print(Fore.LIGHTCYAN_EX + "\u2664    " * 4 + "\u2661    " * 4 + "\u2667    "* 4 + "\u2662    " * 4 + "\n")
@@ -176,7 +174,7 @@ while True:
     #print choice option
     print("Choose an option from below and press enter: \n")  
     choice = int(input("""
-        1. Start Game
+        1. Start Game 
         2. View Instructions
         3. Reset
         4. Exit
