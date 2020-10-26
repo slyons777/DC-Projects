@@ -182,7 +182,7 @@ while True:
     if choice == 1:
         play_blackjack(deck)    
     elif choice == 2:
-        view_instructions(deck)
+        view_instructions(deck)     
     elif choice == 3:
         clear()       
     else:
