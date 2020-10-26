@@ -1,6 +1,5 @@
 
 from colorama import Fore
-import os
 import random
 
 
@@ -13,8 +12,6 @@ class Card:
     
     def __str__(self):
         return self.card + " of " + self.suit
-        
-        
         
 
 ##lists and dictionaries of card and card values
