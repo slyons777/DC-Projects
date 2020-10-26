@@ -1,6 +1,14 @@
 
+from subprocess import call
 from colorama import Fore
+import time
+import os
 import random
+
+
+#set to use clear 
+def clear():
+    call("clear" if os.name == "posix" else "cls")
 
 
 ##set up of Card class
@@ -50,6 +58,7 @@ def play_blackjack(self):
         #card deal using random function
         player_card = random.choice(deck)
         player_hands.append(player_card)
+        #takes card out of deck
         deck.remove(player_card)
     
         #score calculator
@@ -66,7 +75,8 @@ def play_blackjack(self):
         print(player_card)
         print("PLAYER SCORE = ", player_score)
     
-        input()
+        input(Fore.LIGHTCYAN_EX + "Press enter for next card\n" + Fore.RESET)
+        
     
         #random card deal
         dealer_card = random.choice(deck)
@@ -91,16 +101,17 @@ def play_blackjack(self):
                 dealer_hands[1].card_value = 1
                 dealer_score -= 10
     
-        input()
+        input(Fore.LIGHTCYAN_EX + "Press enter...\n" + Fore.RESET)
     
         #different variations of scores and win/loss statements
         if player_score == 21:
             print(Fore.RED + "YOU HAVE BLACKJACK!!" + Fore.RESET)
-            print(Fore.RED + "YOU WIN!!" + Fore.RESET)
+            print(Fore.RED + "YOU WIN!!\n" + Fore.RESET)
             break
             play_blackjack(deck)
+
         elif dealer_score == 21:
-            print(Fore.RED + "Oh no! Dealer HAS BLACKJACK!! You lose. :(" + Fore.RESET)
+            print(Fore.RED + "Oh no! Dealer HAS BLACKJACK!! You lose. :(\n" + Fore.RESET)
             break
             play_blackjack(deck)
 
@@ -116,11 +127,11 @@ def play_blackjack(self):
                 play_blackjack(deck)
 
             elif dealer_score > player_score and dealer_score < 21:
-                print(Fore.RED + "DEALER WINS!" + Fore.RESET)
+                print(Fore.RED + "DEALER WINS!" + Fore.RESET + "\n")
                 break
                 play_blackjack(deck)
             
-            elif dealer_score > player_score and dealer_score > 21:
+            elif dealer_score > 21:
                 print(Fore.RED + "DEALER BUST" + Fore.RESET)
                 break
                 play_blackjack(deck)
@@ -129,6 +140,7 @@ def play_blackjack(self):
                 print(Fore.RED + "Better luck next time" + Fore.RESET)
                 break
                 play_blackjack(deck)
+
             else:
                 player_score == dealer_score
                 print(Fore.RED + "PUSH" + Fore.RESET)
@@ -151,7 +163,6 @@ def view_instructions(self):
     """
     print(rules)
 
-
 ##menu
 while True:
     #print centered welcome statement
@@ -167,20 +178,25 @@ while True:
     choice = int(input("""
         1. Start Game
         2. View Instructions
-        3. Exit
+        3. Reset
+        4. Exit
         """))
     if choice == 1:
-        play_blackjack(deck)
+        play_blackjack(deck)    
     elif choice == 2:
         view_instructions(deck)
+    elif choice == 3:
+        clear()       
     else:
+        #alignment and color setting for closing greeting
         greeting2 = Fore.RED + "THANKS FOR PLAYING! \n" + Fore.RESET
         centered2 = greeting2.center(78)
 
+        #color and spacing setting for greeting
         print(Fore.LIGHTCYAN_EX + "\u2664    " * 4 + "\u2661    " * 4 + "\u2667    "* 4 + "\u2662    " * 4 + "\n" + Fore.RESET)
         print(centered2)
         print(Fore.LIGHTCYAN_EX  + "\u2664    " * 4 + "\u2661    " * 4 + "\u2667    "* 4 + "\u2662    " * 4 + "\n" + Fore.RESET)
-        quit()
+        break
   
                     
 
